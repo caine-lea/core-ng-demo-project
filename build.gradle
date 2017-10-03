@@ -62,12 +62,3 @@ project(':benchmark') {
         compile 'org.openjdk.jmh:jmh-generator-annprocess:1.19'
     }
 }
-
-project(':http-test') {
-    apply from: file("${rootDir}/gradle/app.gradle")
-    dependencies {
-        compile project(':demo-service-interface')
-        compile "core.framework:core-ng:${coreNGVersion}"
-        compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.9.0'
-    }
-}
