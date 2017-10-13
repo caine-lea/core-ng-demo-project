@@ -33,7 +33,7 @@ public class ProductModule extends Module {
         kafka().uri("localhost:9092");
 
         kafka().subscribe("product-updated", ProductUpdatedMessage.class, bind(ProductUpdatedBulkMessageHandler.class))
-               .poolSize(2);
+            .poolSize(2);
 
         kafka().publish("product-updated", ProductUpdatedMessage.class);
         route().get("/kafka-test", bind(ProductUpdatedMessageTestController.class));
