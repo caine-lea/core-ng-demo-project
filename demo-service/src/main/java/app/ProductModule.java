@@ -27,14 +27,14 @@ public class ProductModule extends Module {
         api().service(ProductWebService.class, bind(ProductWebServiceImpl.class));
 
         http().limitRate()
-            .add("product", 3, 20, TimeUnit.MINUTES);
+              .add("product", 3, 20, TimeUnit.MINUTES);
     }
 
     private void configureKafka() {
         kafka().uri("localhost:9092");
 
-        kafka().subscribe("product-updated", ProductUpdatedMessage.class, bind(ProductUpdatedBulkMessageHandler.class))
-            .poolSize(2);
+        kafka().subscribe("product-updated", ProductUpdatedMessage.class, bind(ProductUpdatedBulkMessageHandler.class));
+        kafka().poolSize(2);
 
         kafka().publish("product-updated", ProductUpdatedMessage.class);
         route().get("/kafka-test", bind(ProductUpdatedMessageTestController.class));
