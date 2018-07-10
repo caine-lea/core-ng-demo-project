@@ -2,14 +2,15 @@ package app.demo;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static core.framework.test.Assertions.assertConfDirectory;
+
 
 /**
  * @author neo
  */
 class ConfigTest extends IntegrationTest {
     @Test
-    void initialize() {
-        assertTrue(true, "test context should be initialized successfully");
+    void conf() {
+        assertConfDirectory().overridesDefaultResources();
     }
 }
