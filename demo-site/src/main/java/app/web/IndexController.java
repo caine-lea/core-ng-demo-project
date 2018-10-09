@@ -22,7 +22,7 @@ public class IndexController {
     @Protected(operation = "index")
     public Response index(Request request) {
         IndexPage model = new IndexPage();
-        model.name = message.get("key.name", languageManager.language()).orElse("world not found");
+        model.name = message.get("key.name", languageManager.language());
         model.imageURL = "https://image.com/image123.jpg";
 
         Session session = request.session();
@@ -36,7 +36,7 @@ public class IndexController {
 
     public Response submit(Request request) {
         logger.warn("test");
-        return Response.text("hello " + request.formParam("name").orElse("nobody"));
+        return Response.text("hello " + request.formParams().getOrDefault("name", "nobody"));
     }
 
     public Response logout(Request request) {

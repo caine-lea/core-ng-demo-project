@@ -1,9 +1,9 @@
 package core.framework.impl.template.model;
 
 import core.framework.util.Lists;
-import core.framework.util.Sets;
 import core.framework.util.Strings;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -95,38 +95,38 @@ public class SearchURLBuilder {
 
         if (global) {
             String vendorNumbers = vendorNumbers();
-            if (!Strings.isEmpty(vendorNumbers)) {
+            if (!Strings.isBlank(vendorNumbers)) {
                 builder.addQueryParam("vendor", vendorNumbers);
             }
         }
 
         String categoryId = categoryId();
-        if (!Strings.isEmpty(categoryId)) {
+        if (!Strings.isBlank(categoryId)) {
             builder.addQueryParam("category", categoryId);
         }
 
         String brands = brands();
-        if (!Strings.isEmpty(brands)) {
+        if (!Strings.isBlank(brands)) {
             builder.addQueryParam("brand", brands);
         }
 
         String color = colors();
-        if (!Strings.isEmpty(color)) {
+        if (!Strings.isBlank(color)) {
             builder.addQueryParam("color", color);
         }
 
         String size = size();
-        if (!Strings.isEmpty(size)) {
+        if (!Strings.isBlank(size)) {
             builder.addQueryParam("size", size);
         }
 
         String price = price();
-        if (!Strings.isEmpty(price)) {
+        if (!Strings.isBlank(price)) {
             builder.addQueryParam("price", price);
         }
 
         String sort = sort();
-        if (!Strings.isEmpty(sort)) {
+        if (!Strings.isBlank(sort)) {
             builder.addQueryParam("sort", sort);
         }
 
@@ -158,7 +158,7 @@ public class SearchURLBuilder {
     }
 
     String price() {
-        if (!Strings.isEmpty(price)) {
+        if (!Strings.isBlank(price)) {
             return price;
         }
 
@@ -185,12 +185,12 @@ public class SearchURLBuilder {
     }
 
     String join(List<String> list, String... values) {
-        Set<String> concat = Sets.newHashSet(values);
+        Set<String> concat = new HashSet<>(Set.of(values));
         if (list != null) {
             concat.addAll(list);
         }
         return concat.stream()
-            .filter(value -> !Strings.isEmpty(value))
-            .collect(Collectors.joining("~"));
+                     .filter(value -> !Strings.isBlank(value))
+                     .collect(Collectors.joining("~"));
     }
 }

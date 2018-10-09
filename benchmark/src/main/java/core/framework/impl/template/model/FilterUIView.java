@@ -1,6 +1,5 @@
 package core.framework.impl.template.model;
 
-import core.framework.util.Lists;
 import core.framework.util.Strings;
 
 import java.text.DecimalFormat;
@@ -57,7 +56,7 @@ public class FilterUIView {
     }
 
     public Boolean hasQuery() {
-        return !Strings.isEmpty(searchProductRequest.query);
+        return !Strings.isBlank(searchProductRequest.query);
     }
 
     public Boolean isCategorySelected() {
@@ -163,7 +162,7 @@ public class FilterUIView {
     }
 
     public List<Sort> sortMethods() {
-        return Lists.newArrayList(Sort.values());
+        return List.of(Sort.values());
     }
 
     public Boolean isSortSelected(Sort sort) {

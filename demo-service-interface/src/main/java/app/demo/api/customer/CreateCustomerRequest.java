@@ -1,21 +1,21 @@
 package app.demo.api.customer;
 
 import core.framework.api.json.Property;
-import core.framework.api.validate.NotEmpty;
+import core.framework.api.validate.NotBlank;
 import core.framework.api.validate.NotNull;
 
 public class CreateCustomerRequest {
     @NotNull
-    @NotEmpty
+    @NotBlank
     @Property(name = "email")
     public String email;
 
     @NotNull
-    @NotEmpty
+    @NotBlank
     @Property(name = "first_name")
     public String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Property(name = "last_name")
     public String lastName;
 }

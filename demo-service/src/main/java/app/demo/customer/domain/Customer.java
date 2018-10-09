@@ -1,6 +1,6 @@
 package app.demo.customer.domain;
 
-import core.framework.api.validate.NotEmpty;
+import core.framework.api.validate.NotBlank;
 import core.framework.api.validate.NotNull;
 import core.framework.db.Column;
 import core.framework.db.PrimaryKey;
@@ -19,16 +19,16 @@ public class Customer {
     public CustomerStatus status;
 
     @NotNull
-    @NotEmpty
+    @NotBlank
     @Column(name = "email")
     public String email;
 
     @NotNull
-    @NotEmpty
+    @NotBlank
     @Column(name = "first_name")
     public String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Column(name = "last_name")
     public String lastName;
 

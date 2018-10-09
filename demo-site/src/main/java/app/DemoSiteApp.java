@@ -1,5 +1,6 @@
 package app;
 
+import app.web.ajax.Bean;
 import core.framework.module.App;
 import core.framework.module.SystemModule;
 
@@ -11,12 +12,14 @@ public class DemoSiteApp extends App {
     protected void initialize() {
         load(new SystemModule("sys.properties"));
 
-        http().enableGZip();
+        http().gzip();
         http().httpsPort(8443);
 
         site().security();
         log().maskFields("password");
 
         load(new WebModule());
+
+        api().bean(Bean.class);
     }
 }
