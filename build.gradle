@@ -11,8 +11,8 @@ subprojects {
     }
 }
 
-def coreNGVersion = '6.9.11.4'
-def kafkaVersion = '2.0.0'
+def coreNGVersion = '6.10.4'
+def kafkaVersion = '2.1.0'
 def hsqlVersion = '2.4.1'
 
 configure(subprojects.findAll { it.name.endsWith('-db-migration') }) {
@@ -20,6 +20,17 @@ configure(subprojects.findAll { it.name.endsWith('-db-migration') }) {
 
     dependencies {
         runtimeOnly 'mysql:mysql-connector-java:8.0.13'
+    }
+}
+
+configure(subprojects.findAll { it.name.endsWith('-es-migration') }) {
+    apply from: file("${rootDir}/gradle/app.gradle")
+    dependencies {
+        implementation "core.framework:core-ng:${coreNGVersion}"
+        implementation "core.framework:core-ng-search:${coreNGVersion}"
+    }
+    task esMigrate {
+        dependsOn run
     }
 }
 
@@ -42,7 +53,9 @@ configure([project(':demo-service'),
 project(':demo-service') {
     dependencies {
         implementation project(':demo-service-interface')
+        implementation "core.framework:core-ng-search:${coreNGVersion}"
         runtimeOnly 'mysql:mysql-connector-java:8.0.13'
+        testImplementation "core.framework:core-ng-search-test:${coreNGVersion}"
         testRuntimeOnly "org.hsqldb:hsqldb:${hsqlVersion}"
     }
 }
